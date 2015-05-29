@@ -14,6 +14,11 @@ class MainPage(webapp2.RequestHandler):
 		template = JINJA_ENVIRONMENT.get_template('index.html')
 		self.response.write(template.render())
 
+class IngressFoo(webapp2.RequestHandler):
+	def get(self):
+		return webapp2.Response('Hello, world!')
+
 application = webapp2.WSGIApplication([
 	('/', MainPage),
+	('/ingress/foo', IngressFoo)
 ], debug=True)
