@@ -5,6 +5,8 @@ api_version: 1
 threadsafe: true
 
 handlers:
+- url: /ingress/scripts
+  static_dir: ingress/scripts
 - url: /images
   static_dir: images
   mime_type: "image/gif"
