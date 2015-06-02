@@ -4,6 +4,11 @@ var getFarmData = function(){
 	element.type = 'text/javascript';
 	document.getElementsByTagName('head')[0].appendChild(element);
 
+	var element = document.createElement('script');
+	element.src = '	http://code.jquery.com/jquery-2.1.4.js';
+	element.type = 'text/javascript';
+	document.getElementsByTagName('head')[0].appendChild(element);
+
 	var portalGuids = [
 		"fff3620232dc442198bae1f592204f17.16",
 		"03963442c5f0480b9fd5e3eba376bf64.16",
@@ -60,9 +65,19 @@ var getFarmData = function(){
 
 	var cb = function(response) {
 		results.push(response.result);
+		console.log(response.result[8]);
 		--remainingResults;
 		if (remainingResults === 0){
-			console.log(JSON.stringify(results));
+			$.ajax({
+				type: "POST",
+				url: "http://www.stormtide.net/ingress/uploadFarmData",
+				contentType: "application/json; charset=utf-8",
+				dataType: 'json',
+				data: JSON.stringify(results),
+				success: function(data){
+					console.log('Results uploaded to www.stormtide.net.')
+				}
+			});
 		};
 	}
 	for(var i = 0; i < portalGuids.length; ++i) {

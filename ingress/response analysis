@@ -1,0 +1,27 @@
+Portal: {
+[1]: Faction Owner ('E', 'R', 'N') - enlightened, resistance, neutral (enum?)
+[8]: Name (string)
+[13]: Mods[]
+  {
+   [0]: Owner
+   [1]: Mod Type (Portal shield, Turret, Force Amp, Heat Sink, Multi-Hack, Link Amp)
+   [2]: Mod rarity ("COMMON", "RARE", "VERY_RARE", etc)
+   [3]: Mod stats
+  }
+[14]: Resonators[]
+  {
+   [0]: Owner
+   [1]: Level
+   [2]: Energy
+  }
+15: Owner
+
+[0] - appears to be always 'p' (for portal?)
+[2], [3] appear to be coordinates
+[4] appears to be portal level
+[5] - appears to be portal health (% full?)
+[6] - appears to be resonator count
+[7] - picture
+[9], [10], [11], [12] - always [], false, false, null?
+[16] - appear to be always ["", "", []]
+   
