@@ -1,0 +1,43 @@
+<html>
+	<body>
+		<div style="text-align:center;">
+			<h3>Farm Status</h3>
+			<p>Last updated: {{ dateUpdated }}</p>
+			<div>Neutral portals: {{ portalCounts.neutralPortals }}</div>
+			<div>Resistance portals: {{ portalCounts.resistancePortals }}</div>
+			<div>
+				Enlightened portals: {{portalCounts.enlightenedPortals}}
+				<div>
+					{%- for enlightenedPortalCount in portalCounts.enlightenedPortalCounts %}
+							<div>{{ enlightenedPortalCount.count }} enlightened portals with {{ enlightenedPortalCount.resonatorCount }} R8's</div>
+					{%- endfor %}
+				</div>
+			</div>
+			<form method="get" action="">
+				IGN: <input type="text" name="IGN" />
+				<input type="submit" value="Get Assignment" />
+			</form>
+			{%- if IGN != "" %}
+				<h3>{{IGN}}</h3>
+				<h4>Portals to deploy:</h4>
+				{%- for portal in portalsForIGN %}
+					<div>
+						{{ portal.Name }}
+					</div>
+				{%- endfor %}
+				<h4>Ghost portals to capture:</h4>
+				{%- for portal in neutralPortalsForIGN %}
+					<div>
+						{{ portal.Name }}
+					</div>
+				{%- endfor %}
+				<h4>Blue portals to capture:</h4>
+				{%- for portal in resistancePortalsForIGN %}
+					<div>
+						{{ portal.Name }}
+					</div>
+				{%- endfor %}
+			{%- endif %}
+		</div>
+	</body>
+</html>
