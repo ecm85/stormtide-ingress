@@ -32,6 +32,10 @@ class PortalCounts(object):
 		self.neutralPortals = self.resistancePortals = self.enlightendPortals = None
 		self.enlightenedPortalCounts = None
 
+class Deployer(object):
+	def __init__(self):
+		self.Name = self.DeployedCount = None
+
 class MainPage(webapp2.RequestHandler):
 	def get(self):
 		template = JINJA_ENVIRONMENT.get_template('index.html')
@@ -99,6 +103,15 @@ class IngressIntel(webapp2.RequestHandler):
 		portalsForIGN = sorted([portal for portal in enlightenedPortals if IGN not in portal.Level8ResonatorOwners and portal.MissingResonatorCount > 0], key=lambda portal: portal.MissingResonatorCount)
 		neutralPortalsForIGN = sorted([portal for portal in neutralPortals], key=lambda portal: portal.Name)
 		resistancePortalsForIGN = sorted([portal for portal in resistancePortals], key=lambda portal: portal.Name)
+		deployedPortalCountForIGN = len([portal for portal in enlightenedPortals if IGN in portal.Level8ResonatorOwners])
+
+		currentDeployerNames = (list(set([deployer for portal in enlightenedPortals for deployer in portal.Level8ResonatorOwners])))
+		currentDeployers = []
+		for currentDeployerName in currentDeployerNames:
+			deployer = Deployer()
+			deployer.Name = currentDeployerName
+			deployer.DeployedCount = len([portal for portal in enlightenedPortals if currentDeployerName in portal.Level8ResonatorOwners])
+			currentDeployers.append(deployer)
 
 		self.response.write(template.render(
 			portalCounts = portalCounts,
@@ -106,7 +119,9 @@ class IngressIntel(webapp2.RequestHandler):
 			IGN = IGN,
 			portalsForIGN = portalsForIGN,
 			neutralPortalsForIGN = neutralPortalsForIGN,
-			resistancePortalsForIGN = resistancePortalsForIGN
+			resistancePortalsForIGN = resistancePortalsForIGN,
+			deployedPortalCountForIGN = deployedPortalCountForIGN,
+			currentDeployers = sorted(currentDeployers, key=lambda currentDeployer: -currentDeployer.DeployedCount)
 		))
 
 application = webapp2.WSGIApplication([

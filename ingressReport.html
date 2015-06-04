@@ -3,13 +3,13 @@
 		<div style="text-align:center;">
 			<h3>Farm Status</h3>
 			<p>Last updated: {{ dateUpdated }}</p>
-			<div>Neutral portals: {{ portalCounts.neutralPortals }}</div>
-			<div>Resistance portals: {{ portalCounts.resistancePortals }}</div>
+			<div>Neutral portal(s): {{ portalCounts.neutralPortals }}</div>
+			<div>Resistance portal(s): {{ portalCounts.resistancePortals }}</div>
 			<div>
-				Enlightened portals: {{portalCounts.enlightenedPortals}}
+				Enlightened portal(s): {{portalCounts.enlightenedPortals}}
 				<div>
 					{%- for enlightenedPortalCount in portalCounts.enlightenedPortalCounts %}
-							<div>{{ enlightenedPortalCount.count }} enlightened portals with {{ enlightenedPortalCount.resonatorCount }} R8's</div>
+							<div>{{ enlightenedPortalCount.count }} enlightened portal(s) with {{ enlightenedPortalCount.resonatorCount }} R8's</div>
 					{%- endfor %}
 				</div>
 			</div>
@@ -19,6 +19,7 @@
 			</form>
 			{%- if IGN != "" %}
 				<h3>{{IGN}}</h3>
+				<span>Deployed to {{deployedPortalCountForIGN}} portal(s)</span>
 				<h4>Portals to deploy:</h4>
 				{%- for portal in portalsForIGN %}
 					<div>
@@ -36,6 +37,11 @@
 					<div>
 						{{ portal.Name }}
 					</div>
+				{%- endfor %}
+			{%- else %}
+				Current Deployers:
+				{%- for deployer in currentDeployers %}
+					<div>{{deployer.Name}} - Deployed to {{deployer.DeployedCount}} portal(s)</div>
 				{%- endfor %}
 			{%- endif %}
 		</div>
