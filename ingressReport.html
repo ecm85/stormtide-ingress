@@ -22,7 +22,7 @@
 				<h4>Portals to deploy:</h4>
 				{%- for portal in portalsForIGN %}
 					<div>
-						{{ portal.Name }}
+						{{ portal.Name }} - Needs {{portal.MissingResonatorCount}}
 					</div>
 				{%- endfor %}
 				<h4>Ghost portals to capture:</h4>

@@ -5,6 +5,7 @@ import webapp2
 import json
 from pytz.gae import pytz
 from itertools import *
+import operator
 from google.appengine.ext import ndb
 
 JINJA_ENVIRONMENT = jinja2.Environment(
@@ -16,6 +17,7 @@ class Portal(ndb.Model):
 	Name=ndb.StringProperty()
 	Level8ResonatorOwners=ndb.StringProperty(repeated=True)
 	Faction=ndb.StringProperty()
+	MissingResonatorCount=ndb.IntegerProperty()
 
 class PortalList(ndb.Model):
 	Portals=ndb.LocalStructuredProperty(Portal, repeated=True)
@@ -39,17 +41,21 @@ class IngressUploadFarmData(webapp2.RequestHandler):
 	def post(self):
 		self.response.headers.add_header('Access-Control-Allow-Origin', "https://www.ingress.com")
 		self.response.headers['Content-Type'] = 'application/json'
+		
 		portalList = PortalList.query().get()
 		if portalList is not None:
 			portalList.key.delete()
+		
 		newPortals = json.loads(self.request.body)
 		portalList = PortalList()
 		portalList.portals = []
 		for newPortal in newPortals:
+			level8ResonatorOwners = [resonator[0] for resonator in newPortal[14] if resonator[1] == 8]
 			portalList.Portals.append(Portal(
 				Name=newPortal[8],
-				Level8ResonatorOwners=[resonator[0] for resonator in newPortal[14] if resonator[1] == 8],
-				Faction=newPortal[1]
+				Level8ResonatorOwners=level8ResonatorOwners,
+				Faction=newPortal[1],
+				MissingResonatorCount=8-len(level8ResonatorOwners)
 			))
 		portalList.put()
 
@@ -90,9 +96,9 @@ class IngressIntel(webapp2.RequestHandler):
 		IGN = self.request.get('IGN')
 
 		template = JINJA_ENVIRONMENT.get_template('ingressReport.html')
-		portalsForIGN = [portal for portal in enlightenedPortals if IGN not in portal.Level8ResonatorOwners]
-		neutralPortalsForIGN = [portal for portal in neutralPortals]
-		resistancePortalsForIGN = [portal for portal in resistancePortals]
+		portalsForIGN = sorted([portal for portal in enlightenedPortals if IGN not in portal.Level8ResonatorOwners and portal.MissingResonatorCount > 0], key=lambda portal: portal.MissingResonatorCount)
+		neutralPortalsForIGN = sorted([portal for portal in neutralPortals], key=lambda portal: portal.Name)
+		resistancePortalsForIGN = sorted([portal for portal in resistancePortals], key=lambda portal: portal.Name)
 
 		self.response.write(template.render(
 			portalCounts = portalCounts,
