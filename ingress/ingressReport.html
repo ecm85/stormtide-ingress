@@ -20,9 +20,14 @@
 				</ul>
 				<div class="tab-content">
 					<div class="tab-pane fade in active" id="assignment">
-						<form class="form-inline" method="get" action="">
-							IGN: <input class="form-control ign-input" type="text" name="IGN" />
-							<input class="btn btn-primary" type="submit" value="Get Assignment" />
+						<form class="form-inline" method="get" action="" autocomplete="off">
+							IGN: <input class="form-control ign-input" type="text" name="IGN" list="deployers" autocomplete="off" />
+							<input class="btn btn-primary" type="submit" value="Get Assignment" autocomplete="off" />
+							<datalist id="deployers">
+								{%- for deployer in currentDeployers %}
+									<option value="{{ deployer.Name }}">
+								{%- endfor %}
+							</datalist>
 						</form>
 						{%- if IGN != "" %}
 							<h3>{{IGN}}</h3>
