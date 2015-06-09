@@ -1,0 +1,75 @@
+<html>
+	<head>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.4/cyborg/bootstrap.min.css">
+		<link rel="stylesheet" href="styles/ingressReport.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+	</head>
+	<body>
+		<div>
+			<div class="jumbotron">
+				<div class="container text-center">
+					<div class="ingress h1">Falls Farm Intel</div>
+					<p>Last updated: {{ dateUpdated }}</p>
+				</div>
+			</div>
+			<div class="container well text-center">
+				<ul class="nav nav-tabs">
+					<li class="nav active"><a href="#assignment" data-toggle="tab">Assignment</a></li>
+					<li class="nav"><a href="#farm-report" data-toggle="tab">Farm Report</a></li>
+				</ul>
+				<div class="tab-content">
+					<div class="tab-pane fade in active" id="assignment">
+						<form class="form-inline" method="get" action="">
+							IGN: <input class="form-control ign-input" type="text" name="IGN" />
+							<input class="btn btn-primary" type="submit" value="Get Assignment" />
+						</form>
+						{%- if IGN != "" %}
+							<h3>{{IGN}}</h3>
+							<span>Deployed to {{deployedPortalCountForIGN}} portal(s)</span>
+							<h4>Portals to deploy:</h4>
+							{%- for portal in portalsForIGN %}
+								<div>
+									{{ portal.Name }} - Needs {{portal.MissingResonatorCount}}
+								</div>
+							{%- endfor %}
+							<h4>Ghost portals to capture:</h4>
+							{%- for portal in neutralPortalsForIGN %}
+								<div>
+									{{ portal.Name }}
+								</div>
+							{%- endfor %}
+							<h4>Blue portals to capture:</h4>
+							{%- for portal in resistancePortalsForIGN %}
+								<div>
+									{{ portal.Name }}
+								</div>
+							{%- endfor %}
+						{%- endif %}
+					</div>
+					<div class="tab-pane fade" id="farm-report">
+						<div>
+							Farm Status:
+						</div>
+						<div>
+							<div>Neutral portal(s): {{ portalCounts.neutralPortals }}</div>
+							<div>Resistance portal(s): {{ portalCounts.resistancePortals }}</div>
+							<div>
+								Enlightened portal(s): {{portalCounts.enlightenedPortals}}
+								<div>
+									{%- for enlightenedPortalCount in portalCounts.enlightenedPortalCounts %}
+										<div>{{ enlightenedPortalCount.count }} enlightened portal(s) with {{ enlightenedPortalCount.resonatorCount }} R8's</div>
+									{%- endfor %}
+								</div>
+							</div>
+							Current Deployers:
+							{%- for deployer in currentDeployers %}
+								<div>{{deployer.Name}} - Deployed to {{deployer.DeployedCount}} portal(s)</div>
+							{%- endfor %}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

@@ -99,7 +99,7 @@ class IngressIntel(webapp2.RequestHandler):
 
 		IGN = self.request.get('IGN')
 
-		template = JINJA_ENVIRONMENT.get_template('ingressReport.html')
+		template = JINJA_ENVIRONMENT.get_template('ingress/ingressReport.html')
 		portalsForIGN = sorted([portal for portal in enlightenedPortals if IGN not in portal.Level8ResonatorOwners and portal.MissingResonatorCount > 0], key=lambda portal: portal.MissingResonatorCount)
 		neutralPortalsForIGN = sorted([portal for portal in neutralPortals], key=lambda portal: portal.Name)
 		resistancePortalsForIGN = sorted([portal for portal in resistancePortals], key=lambda portal: portal.Name)

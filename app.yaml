@@ -7,6 +7,8 @@ threadsafe: true
 handlers:
 - url: /ingress/scripts
   static_dir: ingress/scripts
+- url: /ingress/styles
+  static_dir: ingress/styles
 - url: /images
   static_dir: images
   mime_type: "image/gif"

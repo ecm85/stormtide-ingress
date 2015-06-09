@@ -1,0 +1,32 @@
+.h1.ingress {
+	color: #28f428;
+}
+
+.btn-primary {
+	border: 1px solid #59fbea;
+	background-color: rgb(0, 79, 74);
+	color: #59fbea;
+}
+
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus { 
+	background-color: rgba(16, 32, 35, 0.9);
+	border: 1px solid #ebbc4a;
+	color: #ebbc4a;
+}
+
+.nav-tabs>li>a, .nav-tabs>li>a:hover, .nav-tabs>li>a:focus { 
+	background-color: rgb(0, 79, 74);
+	border: 1px solid #59fbea;
+	color: #59fbea;
+}
+
+.form-control.ign-input {
+	background-color: rgb(11, 12, 13);
+	color: #ddd;
+	border: 1px solid #59fbea;
+}
+
+input:-webkit-autofill, input:-webkit-autofill:active, input:-webkit-autofill:focus, input:-webkit-autofill:hover {
+    -webkit-box-shadow: 0 0 0px 1000px rgb(11, 12, 13) inset;
+	-webkit-text-fill-color: #ddd !important;
+}
