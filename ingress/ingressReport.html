@@ -9,8 +9,11 @@
 		<div>
 			<div class="jumbotron">
 				<div class="container text-center">
-					<div class="ingress h1">Falls Farm Intel</div>
-					<p>Last updated: {{ dateUpdated }}</p>
+					<img class="ingress-logo" src="images/enlightened_glow.png" />
+					<div class="report-header">
+						<div class="ingress h1">Falls Farm Intel</div>
+						<p class="report-header-component">Last updated: {{ dateUpdated }}</p>
+					</div>
 				</div>
 			</div>
 			<div class="container well text-center">
@@ -21,7 +24,10 @@
 				<div class="tab-content">
 					<div class="tab-pane fade in active" id="assignment">
 						<form class="form-inline" method="get" action="" autocomplete="off">
-							IGN: <input class="form-control ign-input" type="text" name="IGN" list="deployers" autocomplete="off" />
+							<div class="form-group">
+								<label for="IGNInput">IGN: </label>
+								<input class="form-control ign-input" type="text" name="IGN" id="IGNInput" list="deployers" autocomplete="off" placeholder="Enter IGN"/>
+							</div>
 							<input class="btn btn-primary" type="submit" value="Get Assignment" autocomplete="off" />
 							<datalist id="deployers">
 								{%- for deployer in currentDeployers %}

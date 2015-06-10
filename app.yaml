@@ -9,6 +9,8 @@ handlers:
   static_dir: ingress/scripts
 - url: /ingress/styles
   static_dir: ingress/styles
+- url: /ingress/images
+  static_dir: ingress/images
 - url: /images
   static_dir: images
   mime_type: "image/gif"
