@@ -54,7 +54,7 @@ class IngressUploadFarmData(webapp2.RequestHandler):
 		portalList = PortalList()
 		portalList.portals = []
 		for newPortal in newPortals:
-			level8ResonatorOwners = [resonator[0] for resonator in newPortal[14] if resonator[1] == 8]
+			level8ResonatorOwners = [resonator[0] for resonator in newPortal[15] if resonator[1] == 8]
 			portalList.Portals.append(Portal(
 				Name=newPortal[8],
 				Level8ResonatorOwners=level8ResonatorOwners,
