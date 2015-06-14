@@ -9,86 +9,97 @@
 	</head>
 	<body>
 		<div>
-			<nav class="navbar navbar-default">
+			<nav class="navbar navbar-inverse">
 				<div class="container-fluid">
-					<ul class="nav navbar-nav">
-						<li class="nav active"><a href="#assignment" data-toggle="tab">Assignment</a></li>
-						<li class="nav"><a href="#farm-report" data-toggle="tab">Farm Report</a></li>
-					</ul>
+					<div class="navbar-header">
+						<a href="/ingress/intel" class="navbar-brand">
+							<img src="images/enlightened_alt.png" style="height: 30px;"/>
+						</a>
+						<a href="/ingress/intel" class="navbar-brand ingress">
+							Falls Farm Intel
+						</a>
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navigation-buttons">
+							<span class="icon-bar"></span>
+					        <span class="icon-bar"></span>
+					        <span class="icon-bar"></span>
+						</button>
+					</div>
+					<div class="collapse navbar-collapse" id="navigation-buttons">
+						<ul class="nav navbar-nav">
+							<li class="nav active"><a class="ingress" href="#assignment" data-toggle="tab">Assignment</a></li>
+							<li class="nav"><a class="ingress" href="#farm-report" data-toggle="tab">Farm Report</a></li>
+						</ul>
+					</div>
 				</div>
 			</nav>
 		</div>
 		<div>
-			<div class="jumbotron">
-				<div class="container text-center">
-					<img class="ingress-logo" src="images/enlightened_glow.png" />
-					<div style="display: inline-block;">
-						<div class="ingress h1">Falls Farm Intel</div>
-						<div>
+			<div class="container text-center">
+				<div class="panel panel-default">
+					<div class="panel-body tab-content">
+						<div class="tab-pane fade in active" id="assignment">
+							<form class="form-inline" method="get" action="" autocomplete="off">
+								<div class="form-group">
+									<label for="IGNInput">IGN: </label>
+									<input class="form-control ign-input" type="text" name="IGN" id="IGNInput" list="deployers" autocomplete="off" placeholder="Enter IGN"/>
+								</div>
+								<input class="btn btn-primary" type="submit" value="Get Assignment" autocomplete="off" />
+								<datalist id="deployers">
+									{%- for deployer in currentDeployers %}
+										<option value="{{ deployer.Name }}">
+									{%- endfor %}
+								</datalist>
+							</form>
+							{%- if IGN != "" %}
+								<h3>{{IGN}}</h3>
+								<span>Deployed to {{deployedPortalCountForIGN}} portal(s)</span>
+								<h4>Portals to deploy:</h4>
+								{%- for portal in portalsForIGN %}
+									<div>
+										{{ portal.Name }} - Needs {{portal.MissingResonatorCount}}
+									</div>
+								{%- endfor %}
+								<h4>Ghost portals to capture:</h4>
+								{%- for portal in neutralPortalsForIGN %}
+									<div>
+										{{ portal.Name }}
+									</div>
+								{%- endfor %}
+								<h4>Blue portals to capture:</h4>
+								{%- for portal in resistancePortalsForIGN %}
+									<div>
+										{{ portal.Name }}
+									</div>
+								{%- endfor %}
+							{%- endif %}
+						</div>
+						<div class="tab-pane fade" id="farm-report">
+							<div>
+								Farm Status:
+							</div>
+							<div>
+								<div>Neutral portal(s): {{ portalCounts.neutralPortals }}</div>
+								<div>Resistance portal(s): {{ portalCounts.resistancePortals }}</div>
+								<div>
+									Enlightened portal(s): {{portalCounts.enlightenedPortals}}
+									<div>
+										{%- for enlightenedPortalCount in portalCounts.enlightenedPortalCounts %}
+											<div>{{ enlightenedPortalCount.count }} enlightened portal(s) with {{ enlightenedPortalCount.resonatorCount }} R8's</div>
+										{%- endfor %}
+									</div>
+								</div>
+								Current Deployers:
+								{%- for deployer in currentDeployers %}
+									<div>{{deployer.Name}} - Deployed to {{deployer.DeployedCount}} portal(s)</div>
+								{%- endfor %}
+							</div>
+						</div>
+					</div>
+					<div class="panel-footer">
+						<p>
 							Last&nbsp;updated:
 							{{ dateUpdated }}
-						<div>
-					</div>
-				</div>
-			</div>
-			<div class="container well text-center">
-				<div class="tab-content">
-					<div class="tab-pane fade in active" id="assignment">
-						<form class="form-inline" method="get" action="" autocomplete="off">
-							<div class="form-group">
-								<label for="IGNInput">IGN: </label>
-								<input class="form-control ign-input" type="text" name="IGN" id="IGNInput" list="deployers" autocomplete="off" placeholder="Enter IGN"/>
-							</div>
-							<input class="btn btn-primary" type="submit" value="Get Assignment" autocomplete="off" />
-							<datalist id="deployers">
-								{%- for deployer in currentDeployers %}
-									<option value="{{ deployer.Name }}">
-								{%- endfor %}
-							</datalist>
-						</form>
-						{%- if IGN != "" %}
-							<h3>{{IGN}}</h3>
-							<span>Deployed to {{deployedPortalCountForIGN}} portal(s)</span>
-							<h4>Portals to deploy:</h4>
-							{%- for portal in portalsForIGN %}
-								<div>
-									{{ portal.Name }} - Needs {{portal.MissingResonatorCount}}
-								</div>
-							{%- endfor %}
-							<h4>Ghost portals to capture:</h4>
-							{%- for portal in neutralPortalsForIGN %}
-								<div>
-									{{ portal.Name }}
-								</div>
-							{%- endfor %}
-							<h4>Blue portals to capture:</h4>
-							{%- for portal in resistancePortalsForIGN %}
-								<div>
-									{{ portal.Name }}
-								</div>
-							{%- endfor %}
-						{%- endif %}
-					</div>
-					<div class="tab-pane fade" id="farm-report">
-						<div>
-							Farm Status:
-						</div>
-						<div>
-							<div>Neutral portal(s): {{ portalCounts.neutralPortals }}</div>
-							<div>Resistance portal(s): {{ portalCounts.resistancePortals }}</div>
-							<div>
-								Enlightened portal(s): {{portalCounts.enlightenedPortals}}
-								<div>
-									{%- for enlightenedPortalCount in portalCounts.enlightenedPortalCounts %}
-										<div>{{ enlightenedPortalCount.count }} enlightened portal(s) with {{ enlightenedPortalCount.resonatorCount }} R8's</div>
-									{%- endfor %}
-								</div>
-							</div>
-							Current Deployers:
-							{%- for deployer in currentDeployers %}
-								<div>{{deployer.Name}} - Deployed to {{deployer.DeployedCount}} portal(s)</div>
-							{%- endfor %}
-						</div>
+						</p>
 					</div>
 				</div>
 			</div>
