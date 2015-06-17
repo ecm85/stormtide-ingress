@@ -52,32 +52,42 @@
 							</form>
 							{%- if IGN != "" %}
 								<h3>{{IGN}}</h3>
-								<span>Deployed to {{deployedPortalCountForIGN}} portal(s)</span>
-								<h4>Portals to deploy:</h4>
-								{%- for portal in portalsForIGN %}
-									<div>
-										{{ portal.Name }} - Needs {{portal.MissingResonatorCount}}
-									</div>
-								{%- endfor %}
-								<h4>Ghost portals to capture:</h4>
-								{%- for portal in neutralPortalsForIGN %}
-									<div>
-										{{ portal.Name }}
-									</div>
-								{%- endfor %}
-								<h4>Blue portals to capture:</h4>
-								{%- for portal in resistancePortalsForIGN %}
-									<div>
-										{{ portal.Name }}
-									</div>
-								{%- endfor %}
+								<p>Deployed to {{deployedPortalCountForIGN}} portal(s)</p>
+								{%- if portalsForIGN %}
+									<h4>Portals to deploy:</h4>
+									{%- for portal in portalsForIGN %}
+										<div>
+											{{ portal.Name }} - Needs {{portal.MissingResonatorCount}}
+										</div>
+									{%- endfor %}
+								{%- endif %}
+								{%- if neutralPortalsForIGN %}
+									<h4>Ghost portals to capture:</h4>
+									{%- for portal in neutralPortalsForIGN %}
+										<div>
+											{{ portal.Name }}
+										</div>
+									{%- endfor %}
+								{%- endif %}
+								{%- if resistancePortalsForIGN %}
+									<h4>Blue portals to capture:</h4>
+									{%- for portal in resistancePortalsForIGN %}
+										<div>
+											{{ portal.Name }}
+										</div>
+									{%- endfor %}
+								{%- endif %}
+								{%- if not portalsForIGN and not neutralPortalsForIGN and not resistancePortalsForIGN %}
+									<p>No missing portals!</p>
+								{%- endif %}
 							{%- endif %}
 						</div>
 						<div class="tab-pane fade" id="farm-report">
-							<div>
+							<h3>
 								Farm Status:
-							</div>
+							</h3>
 							<div>
+								<h4>Portal Counts:</h4>
 								<div>Neutral portal(s): {{ portalCounts.neutralPortals }}</div>
 								<div>Resistance portal(s): {{ portalCounts.resistancePortals }}</div>
 								<div>
@@ -88,10 +98,12 @@
 										{%- endfor %}
 									</div>
 								</div>
-								Current Deployers:
-								{%- for deployer in currentDeployers %}
-									<div>{{deployer.Name}} - Deployed to {{deployer.DeployedCount}} portal(s)</div>
-								{%- endfor %}
+								{%- if currentDeployers %}
+									<h4>Current Deployers:</h4>
+									{%- for deployer in currentDeployers %}
+										<div>{{deployer.Name}} - Deployed to {{deployer.DeployedCount}} portal(s)</div>
+									{%- endfor %}
+								{%- endif %}
 							</div>
 						</div>
 					</div>
