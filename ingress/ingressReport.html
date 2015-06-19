@@ -87,7 +87,7 @@
 								Farm Status:
 							</h3>
 							<div>
-								<h4>Portal Counts:</h4>
+								<h4>Portal Summary:</h4>
 								<div>Neutral portal(s): {{ portalCounts.neutralPortals }}</div>
 								<div>Resistance portal(s): {{ portalCounts.resistancePortals }}</div>
 								<div>
@@ -98,6 +98,11 @@
 										{%- endfor %}
 									</div>
 								</div>
+								<h4>Portal energy</h4>
+								<div>Entire farm: {{farmEnergy}}%</div>
+								{%- for portal in portalsSortedByEnergy %}
+									<div>{{portal.Name}} - {{portal.PercentEnergy}}%</div>
+								{%- endfor %}
 								{%- if currentDeployers %}
 									<h4>Current Deployers:</h4>
 									{%- for deployer in currentDeployers %}

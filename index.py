@@ -18,6 +18,7 @@ class Portal(ndb.Model):
 	Level8ResonatorOwners=ndb.StringProperty(repeated=True)
 	Faction=ndb.StringProperty()
 	MissingResonatorCount=ndb.IntegerProperty()
+	PercentEnergy=ndb.IntegerProperty()
 
 class PortalList(ndb.Model):
 	Portals=ndb.LocalStructuredProperty(Portal, repeated=True)
@@ -59,7 +60,8 @@ class IngressUploadFarmData(webapp2.RequestHandler):
 				Name=newPortal[8],
 				Level8ResonatorOwners=level8ResonatorOwners,
 				Faction=newPortal[1],
-				MissingResonatorCount=8-len(level8ResonatorOwners)
+				MissingResonatorCount=8-len(level8ResonatorOwners),
+				PercentEnergy=newPortal[5]
 			))
 		portalList.put()
 
@@ -101,9 +103,13 @@ class IngressIntel(webapp2.RequestHandler):
 
 		template = JINJA_ENVIRONMENT.get_template('ingress/ingressReport.html')
 		portalsForIGN = sorted([portal for portal in enlightenedPortals if IGN not in portal.Level8ResonatorOwners and portal.MissingResonatorCount > 0], key=lambda portal: portal.MissingResonatorCount)
-		neutralPortalsForIGN = sorted([portal for portal in neutralPortals], key=lambda portal: portal.Name)
-		resistancePortalsForIGN = sorted([portal for portal in resistancePortals], key=lambda portal: portal.Name)
+		neutralPortalsForIGN = sorted(neutralPortals, key=lambda portal: portal.Name)
+		resistancePortalsForIGN = sorted(resistancePortals, key=lambda portal: portal.Name)
 		deployedPortalCountForIGN = len([portal for portal in enlightenedPortals if IGN in portal.Level8ResonatorOwners])
+
+		portalsSortedByEnergy = sorted(portals, key=lambda portal: portal.PercentEnergy)
+		farmEnergies = [portal.PercentEnergy for portal in portals]
+		farmEnergy = round(float(sum(farmEnergies))/len(farmEnergies), 2)
 
 		currentDeployerNames = (list(set([deployer for portal in enlightenedPortals for deployer in portal.Level8ResonatorOwners])))
 		currentDeployers = []
@@ -114,7 +120,9 @@ class IngressIntel(webapp2.RequestHandler):
 			currentDeployers.append(deployer)
 
 		self.response.write(template.render(
+			farmEnergy = farmEnergy,
 			portalCounts = portalCounts,
+			portalsSortedByEnergy = portalsSortedByEnergy,
 			dateUpdated = utc_to_local(portalList.UploadedDate).strftime('%a %b %d, %Y %I:%M %p'),
 			IGN = IGN,
 			portalsForIGN = portalsForIGN,
