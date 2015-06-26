@@ -54,7 +54,7 @@
 								<h3>{{IGN}}</h3>
 								<p>Deployed to {{deployedPortalCountForIGN}} portal(s)</p>
 								{%- if portalsForIGN %}
-									<h4>Portals to deploy:</h4>
+									<h4>Portals to deploy</h4>
 									{%- for portal in portalsForIGN %}
 										<div>
 											{{ portal.Name }} - Needs {{portal.MissingResonatorCount}}
@@ -62,7 +62,7 @@
 									{%- endfor %}
 								{%- endif %}
 								{%- if neutralPortalsForIGN %}
-									<h4>Ghost portals to capture:</h4>
+									<h4>Ghost portals to capture</h4>
 									{%- for portal in neutralPortalsForIGN %}
 										<div>
 											{{ portal.Name }}
@@ -70,7 +70,7 @@
 									{%- endfor %}
 								{%- endif %}
 								{%- if resistancePortalsForIGN %}
-									<h4>Blue portals to capture:</h4>
+									<h4>Blue portals to capture</h4>
 									{%- for portal in resistancePortalsForIGN %}
 										<div>
 											{{ portal.Name }}
@@ -84,10 +84,10 @@
 						</div>
 						<div class="tab-pane fade" id="farm-report">
 							<h3>
-								Farm Status:
+								Farm Status
 							</h3>
 							<div>
-								<h4>Portal Summary:</h4>
+								<h4>Farm Summary</h4>
 								<div>Neutral portal(s): {{ portalCounts.neutralPortals }}</div>
 								<div>Resistance portal(s): {{ portalCounts.resistancePortals }}</div>
 								<div>
@@ -98,13 +98,13 @@
 										{%- endfor %}
 									</div>
 								</div>
+								<div>Entire farm energy: {{farmEnergy}}%</div>
 								<h4>Portal energy</h4>
-								<div>Entire farm: {{farmEnergy}}%</div>
 								{%- for portal in portalsSortedByEnergy %}
 									<div>{{portal.Name}} - {{portal.PercentEnergy}}%</div>
 								{%- endfor %}
 								{%- if currentDeployers %}
-									<h4>Current Deployers:</h4>
+									<h4>Current Deployers</h4>
 									{%- for deployer in currentDeployers %}
 										<div>{{deployer.Name}} - Deployed to {{deployer.DeployedCount}} portal(s)</div>
 									{%- endfor %}
