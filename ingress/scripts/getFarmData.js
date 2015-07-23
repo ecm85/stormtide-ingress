@@ -81,6 +81,6 @@ var getFarmData = function(){
 		};
 	}
 	for(var i = 0; i < portalGuids.length; ++i) {
-		Td(R.b().qa.S, Ca, {guid: portalGuids[i]}, cb);
+		Td(R.b().pa.R, Ca, {guid: portalGuids[i]}, cb);
 	}
 }
