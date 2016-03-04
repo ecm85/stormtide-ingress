@@ -19,25 +19,39 @@
 				<div class="modal-body">
 					<form id="create-game-form" method="get" action="">
 						<div class="form-group">
-							<label for="game-name" class="control-label">Name:</label>
-							<input type="text" class="form-control" id="game-name" name="gameName" placeholder="e.g. Sheepshead, Space Alert, etc" />
+							<label for="game-host-name" class="control-label">Your Name:</label>
+							<input type="text" class="form-control" id="game-host-name" name="gameHostName" />
+						</div>
+						<div class="form-group">
+							<label for="game-name" class="control-label">Game Name:</label>
+							<input type="text" class="form-control" id="game-name" name="gameName" placeholder="e.g. Bridge, Space Alert, etc" />
 						</div>
 						<div class="form-group">
 							<label for="game-location" class="control-label">Location:</label>
 							<input type="text" class="form-control" id="game-location" name="gameLocation"
 								placeholder="e.g. Disney, somehwere in Building 6, etc" />
 						</div>
-						<div class="form-group">
-							<label for="game-player-count" class="control-label">Player Count:</label>
-							<input type="text" class="form-control" id="game-player-count" name="gamePlayerCount" />
+						<div class="row">
+							<div class="form-group col-md-2 col-xs-6">
+								<label for="game-player-count" class="control-label">Player Count:</label>
+								<input type="number" min="1" class="form-control" id="game-player-count" name="gamePlayerCount" />
+							</div>
+							<div class="form-group col-md-2 col-xs-6">
+								<label for="game-alternate-count" class="control-label">Alternate Count:</label>
+								<input type="number" min="0" class="form-control" id="game-alternate-count" name="gameAlternateCount" />
+							</div>
 						</div>
-						<div class="form-group">
-							<label for="game-alternate-count" class="control-label">Alternate Count:</label>
-							<input type="text" class="form-control" id="game-alternate-count" name="gameAlternateCount" />
+						<div class="radio-inline">
+							<label>
+								<input type="radio" name="isHostPlayingOptions" id="host-is-playing" autocomplete="off" checked>I'm playing!
+							</label>
 						</div>
-						<!-- TODO: formatting (make both counts only numeric, on single line) -->
-						<!-- TODO: Option for 'i'm playing' or 'im just leading'-->
-						<!-- TODO: Add name of host -->
+						<div class="radio-inline">
+							<label>
+								<input type="radio" name="isHostPlayingOptions" id="host-is-not-playing" autocomplete="off">I'm just hosting.
+							</label>
+						</div>
+						<!-- TODO: figure out if radio button makes it to server-->
 					</form>
 				</div>
 				<div class="modal-footer">
@@ -76,6 +90,7 @@
 					<div class="panel-body tab-content">
 						<div class="tab-pane fade in active" id="current">
 							<h3>This would be a list of current games</h3>
+							<!-- This code used to verify the serer got stuff pre-actual-DB -->
 							<!-- {%- if gameName %}
 								<h3>Would have created: {{gameName}}</h3>
 							{%- endif %} -->

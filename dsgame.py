@@ -17,6 +17,10 @@ JINJA_ENVIRONMENT = jinja2.Environment(
 class DSGame(webapp2.RequestHandler):
 	def get(self):
 		template = JINJA_ENVIRONMENT.get_template('dsgame/DSGame.html')
+		#This code used to verify the serer got stuff pre-actual-DB
 		#gameName = self.request.get('gameName')
 		#self.response.write(template.render(gameName = gameName))
+
+		#TODO: Create a game when requested, return all current games
+		#TODO: Full 'edit' and 'historical' workflows
 		self.response.write(template.render())
