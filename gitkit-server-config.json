@@ -1,0 +1,8 @@
+{
+  "clientId": "165757062887-79t2d9ch8udocntmastrdg8gadhk0on4.apps.googleusercontent.com",
+  "projectId": "storm-tide",
+  "serviceAccountEmail": "",
+  "serviceAccountPrivateKeyFile": "/storm-tide-982619e3e43b.p12",
+  "widgetUrl": "http://stormtide.net/auth",
+  "cookieName": "gtoken"
+}
