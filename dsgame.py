@@ -17,4 +17,6 @@ JINJA_ENVIRONMENT = jinja2.Environment(
 class DSGame(webapp2.RequestHandler):
 	def get(self):
 		template = JINJA_ENVIRONMENT.get_template('dsgame/DSGame.html')
+		#gameName = self.request.get('gameName')
+		#self.response.write(template.render(gameName = gameName))
 		self.response.write(template.render())

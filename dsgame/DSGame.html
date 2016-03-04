@@ -17,32 +17,32 @@
 					<h4 class="modal-title">Create new game</h4>
 				</div>
 				<div class="modal-body">
-					<form>
-					<div class="form-group">
-						<label for="game-name" class="control-label">Name:</label>
-						<input type="text" class="form-control" id="game-name" placeholder="e.g. Sheepshead, Space Alert, etc" />
-					</div>
-					<div class="form-group">
-						<label for="game-location" class="control-label">Location:</label>
-						<input type="text" class="form-control" id="game-location" placeholder="e.g. Disney, somehwere in Building 6, etc" />
-					</div>
-					<div class="form-group">
-						<label for="game-player-count" class="control-label">Player Count:</label>
-						<input type="text" class="form-control" id="game-player-count" />
-					</div>
-					<div class="form-group">
-						<label for="game-alternate-count" class="control-label">Alternate Count:</label>
-						<input type="text" class="form-control" id="game-alternate-count" />
-					</div>
-					<!-- TODO: formatting (make both counts only numeric, on single line) -->
-					<!-- TODO: Option for 'i'm playing' or 'im just leading'-->
-					<!-- TODO: Add name of host -->
+					<form id="create-game-form" method="get" action="">
+						<div class="form-group">
+							<label for="game-name" class="control-label">Name:</label>
+							<input type="text" class="form-control" id="game-name" name="gameName" placeholder="e.g. Sheepshead, Space Alert, etc" />
+						</div>
+						<div class="form-group">
+							<label for="game-location" class="control-label">Location:</label>
+							<input type="text" class="form-control" id="game-location" name="gameLocation"
+								placeholder="e.g. Disney, somehwere in Building 6, etc" />
+						</div>
+						<div class="form-group">
+							<label for="game-player-count" class="control-label">Player Count:</label>
+							<input type="text" class="form-control" id="game-player-count" name="gamePlayerCount" />
+						</div>
+						<div class="form-group">
+							<label for="game-alternate-count" class="control-label">Alternate Count:</label>
+							<input type="text" class="form-control" id="game-alternate-count" name="gameAlternateCount" />
+						</div>
+						<!-- TODO: formatting (make both counts only numeric, on single line) -->
+						<!-- TODO: Option for 'i'm playing' or 'im just leading'-->
+						<!-- TODO: Add name of host -->
 					</form>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-					<button type="button" class="btn btn-primary">Create</button>
-					<!-- TODO: Make this submit and then refresh list -->
+					<button type="submit" class="btn btn-primary" form="create-game-form">Create</button>
 				</div>
 			</div>
 		  </div>
@@ -76,6 +76,9 @@
 					<div class="panel-body tab-content">
 						<div class="tab-pane fade in active" id="current">
 							<h3>This would be a list of current games</h3>
+							<!-- {%- if gameName %}
+								<h3>Would have created: {{gameName}}</h3>
+							{%- endif %} -->
 							<input type="button" value="New Game" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#newGameModal" />
 							<!-- TODO: Button to just create a sheepshead game-->
 							<!-- TODO: Get list of current games -->

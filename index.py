@@ -24,5 +24,5 @@ application = webapp2.WSGIApplication([
 	('/', MainPage),
 	('/ingress/intel', ingress.IngressIntel),
 	('/ingress/uploadFarmData', ingress.IngressUploadFarmData),
-	('/dsgame', dsgame.DSGame),
+	('/dsgame', dsgame.DSGame)
 ], debug=True)
