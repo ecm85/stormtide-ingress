@@ -8,6 +8,7 @@ from itertools import *
 import operator
 from google.appengine.ext import ndb
 import ingress
+import dsgame
 
 JINJA_ENVIRONMENT = jinja2.Environment(
 	loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
@@ -22,5 +23,6 @@ class MainPage(webapp2.RequestHandler):
 application = webapp2.WSGIApplication([
 	('/', MainPage),
 	('/ingress/intel', ingress.IngressIntel),
-	('/ingress/uploadFarmData', ingress.IngressUploadFarmData)
+	('/ingress/uploadFarmData', ingress.IngressUploadFarmData),
+	('/dsgame', dsgame.DSGame),
 ], debug=True)

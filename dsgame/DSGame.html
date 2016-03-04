@@ -1,0 +1,95 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.4/cyborg/bootstrap.min.css">
+		<!-- TODO: Find a better theme -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+	</head>
+	<body>
+		<!-- TODO: Make this panel/navbar match-->
+		<div class="modal fade" id="newGameModal" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+					<h4 class="modal-title">Create new game</h4>
+				</div>
+				<div class="modal-body">
+					<form>
+					<div class="form-group">
+						<label for="game-name" class="control-label">Name:</label>
+						<input type="text" class="form-control" id="game-name" placeholder="e.g. Sheepshead, Space Alert, etc" />
+					</div>
+					<div class="form-group">
+						<label for="game-location" class="control-label">Location:</label>
+						<input type="text" class="form-control" id="game-location" placeholder="e.g. Disney, somehwere in Building 6, etc" />
+					</div>
+					<div class="form-group">
+						<label for="game-player-count" class="control-label">Player Count:</label>
+						<input type="text" class="form-control" id="game-player-count" />
+					</div>
+					<div class="form-group">
+						<label for="game-alternate-count" class="control-label">Alternate Count:</label>
+						<input type="text" class="form-control" id="game-alternate-count" />
+					</div>
+					<!-- TODO: formatting (make both counts only numeric, on single line) -->
+					<!-- TODO: Option for 'i'm playing' or 'im just leading'-->
+					<!-- TODO: Add name of host -->
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+					<button type="button" class="btn btn-primary">Create</button>
+					<!-- TODO: Make this submit and then refresh list -->
+				</div>
+			</div>
+		  </div>
+		</div>
+		<div>
+			<nav class="navbar navbar-inverse">
+				<div class="container-fluid">
+					<div class="navbar-header">
+						<a href="/dsgame">
+							DS Game
+							<!-- TODO: Find actual picture/icon for DS Game-->
+						</a>
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navigation-buttons">
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+					</div>
+					<div class="collapse navbar-collapse" id="navigation-buttons">
+						<ul class="nav navbar-nav">
+							<li class="nav active"><a href="#current" data-toggle="tab">Current Games</a></li>
+							<li class="nav"><a href="#history" data-toggle="tab">Game History</a></li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+		</div>
+		<div>
+			<div class="container text-center">
+				<div class="panel panel-default">
+					<div class="panel-body tab-content">
+						<div class="tab-pane fade in active" id="current">
+							<h3>This would be a list of current games</h3>
+							<input type="button" value="New Game" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#newGameModal" />
+							<!-- TODO: Button to just create a sheepshead game-->
+							<!-- TODO: Get list of current games -->
+							<!-- TODO: Ability to sign up for games -->
+							<!-- TODO: Notifications? -->
+							<!-- TODO: Auth? -->
+						</div>
+						<div class="tab-pane fade" id="history">
+							<h3>This would be a list of historical games</h3>
+							<!-- TODO: Paged list of historical games -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
