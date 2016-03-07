@@ -27,7 +27,6 @@ class DSGame(webapp2.RequestHandler):
 		
 		#TODO: Create a game when requested, return all current games
 		#TODO: Full 'edit' and 'historical' workflows
-		#self.response.write(template.render())
 
 def utc_to_local(utc_dt):
 	local_tz = pytz.timezone('US/Central')
