@@ -27,18 +27,29 @@
 							<input type="text" class="form-control" id="game-name" name="gameName" placeholder="e.g. Bridge, Space Alert, etc" />
 						</div>
 						<div class="form-group">
-							<label for="game-location" class="control-label">Location:</label>
-							<input type="text" class="form-control" id="game-location" name="gameLocation"
+							<label for="game-where" class="control-label">Where:</label>
+							<input type="text" class="form-control" id="game-where" name="gameWhere"
 								placeholder="e.g. Disney, somehwere in Building 6, etc" />
 						</div>
 						<div class="row">
+							<div class="form-group col-md-6">
+								<label for="game-date" class="control-label">Date:</label>
+								<input type="date" class="form-control" id="game-date" name="gameDate" value="{{currentDate}}" />
+							</div>
+							<div class="form-group col-md-6">
+								<label for="game-time" class="control-label">Time:</label>
+								<input type="time" class="form-control" id="game-time" name="gameTime" value="11:30" />
+							</div>
+						</div>
+						<!-- TODO: Add pre-filled options for today @ lunch, others? -->
+						<div class="row">
 							<div class="form-group col-md-2 col-xs-6">
 								<label for="game-player-count" class="control-label">Player Count:</label>
-								<input type="number" min="1" class="form-control" id="game-player-count" name="gamePlayerCount" />
+								<input type="number" min="1" class="form-control" id="game-player-count" name="gamePlayerCount" value="4" />
 							</div>
 							<div class="form-group col-md-2 col-xs-6">
 								<label for="game-alternate-count" class="control-label">Alternate Count:</label>
-								<input type="number" min="0" class="form-control" id="game-alternate-count" name="gameAlternateCount" />
+								<input type="number" min="0" class="form-control" id="game-alternate-count" name="gameAlternateCount" value="0" />
 							</div>
 						</div>
 						<div class="radio-inline">

@@ -61,9 +61,9 @@ class IngressUploadFarmData(webapp2.RequestHandler):
 		self.response.headers['Access-Control-Allow-Methods'] = 'POST'
 
 def utc_to_local(utc_dt):
-    local_tz = pytz.timezone('US/Central')
-    local_dt = utc_dt.replace(tzinfo=pytz.utc).astimezone(local_tz)
-    return local_tz.normalize(local_dt)
+	local_tz = pytz.timezone('US/Central')
+	local_dt = utc_dt.replace(tzinfo=pytz.utc).astimezone(local_tz)
+	return local_tz.normalize(local_dt)
 
 class IngressIntel(webapp2.RequestHandler):
 	def get(self):
